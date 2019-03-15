@@ -1,0 +1,7 @@
+<ol class="founditem">
+    <li ng-repeat="foundMenu in nidc.found">
+        {{ foundMenu.name }}, {{foundMenu.short_name}}, {{foundMenu.description}}
+        <button ng-click="nidc.onRemove({index: $index});">Don't want this one!</button>
+    </li>
+</ol>
+<div class="error" ng-if="nidc.noResults()">Nothing found</div>
