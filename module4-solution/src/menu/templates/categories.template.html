@@ -25,10 +25,10 @@
 </nav>
 
 <div ui-view="items-div">
-    <nav class="nav flex-column mt-2 ml-2">
-        <li class="nav-item" ng-repeat="category in categories.categoriesList">
-            <a class="nav-link" ui-sref="items({categoryId: category.short_name})" href="#">{{category.name}}</a>
-        </li>
-    </nav>
+    <ul class="mt-2 ml-2 list-group">
+        <a class="list-group-item list-group-item-action" ng-repeat="category in categories.categoriesList" ui-sref="items({categoryId: category.short_name})" href="#">
+           {{category.name}}
+        </a>
+    </ul>
 </div>
 
