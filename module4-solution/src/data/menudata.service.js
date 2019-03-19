@@ -22,19 +22,23 @@
             });
         }
 
-        service.getItemsForCategory = function(categoryShortName){
+        service.getItemsForCategory = function(categoryShortName) {
             return $http({
                 method: "GET",
                 url: (ApiBasePath + "/menu_items.json"),
                 params: {
                     category: categoryShortName
                 }
-            }).then(function (result){
-                return result.data.menu_items.sort(function(x, y){
-                    let xName = x.name.toLowerCase();
-                    let yName = y.name.toLowerCase();
-                    return yName <= xName ? xName > yName ? 1 : 0 : -1;
-                });
+            }).then(function (result) {
+                return{
+                    "currentCategory":result.data.category,
+                    "sortedItems":result.data.menu_items.sort(function (x, y) {
+                        let xName = x.name.toLowerCase();
+                        let yName = y.name.toLowerCase();
+                        return yName <= xName ? xName > yName ? 1 : 0 : -1;
+                    })
+                }
+
             });
         }
     }
