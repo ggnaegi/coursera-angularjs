@@ -30,7 +30,11 @@
                     category: categoryShortName
                 }
             }).then(function (result){
-                return result.data;
+                return result.data.menu_items.sort(function(x, y){
+                    let xName = x.name.toLowerCase();
+                    let yName = y.name.toLowerCase();
+                    return yName <= xName ? xName > yName ? 1 : 0 : -1;
+                });
             });
         }
     }

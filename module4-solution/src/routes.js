@@ -28,17 +28,18 @@
                     }]
                 }
             })
-            .state('category.items', {
-                url: '/categories/{category}',
+            .state('items', {
+                parent: 'categories',
+                url: '/items/{categoryId}',
                 templateUrl: 'src/menu/templates/items.template.html',
                 controller: 'ItemsController as items',
                 resolve: {
                     itemsList: ['MenuDataService', '$stateParams',
                     function(MenuDataService, $stateParams){
-                        return MenuDataService.getItemsForCategory($stateParams.category);
+                        return MenuDataService.getItemsForCategory($stateParams.categoryId);
                     }]
                 }
-            });
+            })
     }
 
 })();

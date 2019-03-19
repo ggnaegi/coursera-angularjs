@@ -1,27 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">MyRestaurant</a>
+    <a class="navbar-brand" href="#">MenuApp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" ui-sref="home">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" ui-sref="home">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link">Categories</a>
+                <a class="nav-link">Categories<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose category
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" ui-sref="items({categoryId: category.short_name})" href="#" ng-repeat="category in categories.categoriesList">{{ category.name}}</a>
+                </div>
             </li>
         </ul>
     </div>
 </nav>
-
-<div class="btn-group mt-2 ml-2">
-    <button type="button" class="btn btn-secondary">Choose category</button>
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <div class="dropdown-menu" >
-        <a class="dropdown-item" ui-sref="category.items({category: category.short_name })" href="#" ng-repeat="category in categories.categoriesList">{{ category.name}}</a>
-    </div>
-</div>
+<div ui-view></div>
 
