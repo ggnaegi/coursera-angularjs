@@ -1,0 +1,7 @@
+{
+  "name": "module4-solution-angular-7",
+  "version": "1.0.0",
+  "dependencies": {
+    "@angular/cli": "^7.3.6"
+  }
+}
