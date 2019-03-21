@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule} from "@angular/common";
 import { HttpClientModule } from '@angular/common/http';
-import {UIRouterModule, UIView} from "@uirouter/angular";
+import {UIRouterModule} from "@uirouter/angular";
 import { AppComponent } from './app.component';
 import {CategoriesComponent} from "./categories.component";
-import {ItemsComponent} from "./items.component";
+import {ItemsComponent, ItemsLiComponent} from "./items.component";
 import {DataService} from "./data.service";
 import {routerConfigFn} from './router.config';
 import {APP_STATES} from './app.states';
@@ -16,7 +16,8 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
   declarations: [
     AppComponent,
     CategoriesComponent,
-    ItemsComponent
+    ItemsComponent,
+    ItemsLiComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +32,7 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
   exports: [
     UIRouterModule
   ],
-  providers: [{provide: DataService, useClass: DataService }],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

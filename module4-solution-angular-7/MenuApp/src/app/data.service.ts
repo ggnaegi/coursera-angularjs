@@ -10,12 +10,12 @@ export class DataService {
   constructor(@Inject(HttpClient) private httpClient: HttpClient){
   }
 
-  getAllCategories():Observable<Category> {
-    return this.httpClient.get<Category>(this.baseUrl +"/categories.json");
+  getAllCategories():Promise<Category> {
+    return this.httpClient.get<Category>(this.baseUrl +"/categories.json").toPromise();
   }
 
   getItemsForCategory(categoryShortName){
     return this.httpClient.get(this.baseUrl + "/menu_items.json",
-      {params: new HttpParams().set('category', categoryShortName)});
+      {params: new HttpParams().set('category', categoryShortName)}).toPromise();
   }
 }

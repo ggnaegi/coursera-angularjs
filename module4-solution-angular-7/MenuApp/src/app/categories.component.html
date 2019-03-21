@@ -17,7 +17,7 @@
           Choose category
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" uiSref="items({categoryId: category.short_name})" *ngFor="let category of categoriesList">{{ category.name}}</a>
+          <a class="dropdown-item" uiSref="items" [uiParams]="{categoryId:category.short_name}" *ngFor="let category of categoriesList">{{ category.name}}</a>
         </div>
       </li>
     </ul>
@@ -26,7 +26,7 @@
 
 <div ui-view="items-div">
   <ul class="mt-2 ml-2 list-group">
-    <a class="list-group-item list-group-item-action" *ngFor="let category of categoriesList" uiSref="items" [uiParams]="{categoryShortName:category.short_name}" href="#">
+    <a class="list-group-item list-group-item-action" *ngFor="let category of categoriesList" uiSref="items" [uiParams]="{categoryId:category.short_name}" href="#">
       {{category.name}}
     </a>
   </ul>
