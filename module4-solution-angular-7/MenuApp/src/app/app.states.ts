@@ -55,12 +55,10 @@ export const itemsState = {
   ],
   views:{
     "items-div" : {
-      templateUrl: './items.component.html',
       component:ItemsComponent
     },
     "items-li" :{
-      component:ItemsLiComponent,
-      templateUrl: './items.component.li.html'
+      component:ItemsLiComponent
     }
   }
 };
