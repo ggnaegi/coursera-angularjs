@@ -3,12 +3,17 @@ import {CategoriesComponent} from "./categories.component";
 import {ItemsComponent, ItemsLiComponent} from "./items.component";
 import {DataService} from "./data.service";
 import {Transition} from '@uirouter/core';
+import get = Reflect.get;
 
 export const appState = {
   name: 'app',
   component: AppComponent,
   url: '/',
 };
+
+export const getAllCategoriesPrd = (dataService) => {
+  return dataService.getAllCategories();
+}
 
 export const categoriesState = {
   name: 'categories',
@@ -18,18 +23,14 @@ export const categoriesState = {
     {
       token:'categories',
       deps:[DataService],
-      resolveFn:(dataService) => {
-        return dataService.getAllCategories().then(result =>{
-          return result.sort((x,y) => {
-            let xName = x.name.toLowerCase();
-            let yName = y.name.toLowerCase();
-            return yName <= xName ? xName > yName ? 1 : 0 : -1;
-          })
-        });
-      }
+      resolveFn: getAllCategoriesPrd
     }
   ]
 };
+
+export const getItemsForCategoryPrd = (dataService:DataService, transition:Transition) => {
+  return dataService.getItemsForCategory(transition.params().categoryId);
+}
 
 export const itemsState = {
   name: 'items',
@@ -39,18 +40,7 @@ export const itemsState = {
     {
       token:'itemsData',
       deps:[DataService, Transition],
-      resolveFn: (dataService, transition) => {
-        return dataService.getItemsForCategory(transition.params().categoryId).then(result => {
-          return {
-            'currentCategory':result.category,
-            'sortedItems':result.menu_items.sort((x,y) => {
-              let xName = x.name.toLowerCase();
-              let yName = y.name.toLowerCase();
-              return yName <= xName ? xName > yName ? 1 : 0 : -1;
-            })
-          }
-        })
-      }
+      resolveFn: getItemsForCategoryPrd
     }
   ],
   views:{
@@ -62,9 +52,3 @@ export const itemsState = {
     }
   }
 };
-
-export const APP_STATES = [
-  appState,
-  categoriesState,
-  itemsState
-];

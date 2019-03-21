@@ -8,8 +8,8 @@ import {CategoriesComponent} from "./categories.component";
 import {ItemsComponent, ItemsLiComponent} from "./items.component";
 import {DataService} from "./data.service";
 import {routerConfigFn} from './router.config';
-import {APP_STATES} from './app.states';
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {appState, categoriesState, itemsState} from "./app.states";
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
     HttpClientModule,
     CommonModule,
     UIRouterModule.forRoot({
-      states: APP_STATES,
+      states: [appState, categoriesState, itemsState],
       useHash: true,
       config: routerConfigFn,
     })
