@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/userprofile', {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://mongodbsvc:Fo;hR^i.AGGatHC{KB4}@cluster0-0nxhw.azure.mongodb.net/userprofiles?retryWrites=true", {useNewUrlParser: true});
 
 const bodyParser = require('body-parser');
 const UserProfile  = require('./models/userprofile');
