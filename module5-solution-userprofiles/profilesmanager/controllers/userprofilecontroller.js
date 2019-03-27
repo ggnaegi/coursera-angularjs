@@ -22,10 +22,6 @@ exports.updateUserProfile = function(req, res) {
         if(err)
             res.send(err);
 
-        if(!userProfile) {
-            userProfile = new UserProfile({userId: req.user._id});
-        }
-
         userProfile.firstname = req.body.firstname;
         userProfile.lastname = req.body.lastname;
         userProfile.email = req.body.email;
@@ -44,7 +40,7 @@ exports.updateUserProfile = function(req, res) {
 }
 
 exports.deleteUserProfile = function(req, res) {
-    UserProfile.remove({userId:req.user._id}, function(err){
+    UserProfile.deleteOne({userId:req.user._id}, function(err){
         if(err)
             res.send(err);
 

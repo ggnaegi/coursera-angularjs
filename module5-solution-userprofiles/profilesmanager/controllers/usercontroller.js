@@ -2,25 +2,54 @@ const User = require('../models/user');
 const UserProfile = require('../models/userprofile');
 
 exports.addNewUserAccount = function(req, res) {
-    let user = new User({
-        username: req.body.username,
-        password: req.body.password
-    });
+    User.findOne({username: req.body.username}, function(err, userProfile){
 
-    user.save(function(err) {
-        if (err)
-            res.send(err);
+        if(userProfile)
+            res.json({message: 'User Account Creation Failed (existing username)'});
+        else
+        {
+            let user = new User({
+                username: req.body.username,
+                password: req.body.password
+            });
 
-        res.json({ message: 'New user account created!' });
+            user.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                let userProfile = new UserProfile({
+                    firstname : req.body.firstname,
+                    lastname : req.body.lastname,
+                    email : req.body.email,
+                    phone : req.body.phone,
+                    address : req.body.address,
+                    city : req.body.city,
+                    postCode : req.body.postCode,
+                    favoriteMenuItem : req.body.favoriteMenuItem,
+                    userId : user._id
+                });
+
+                userProfile.save(function(err){
+                    if(err) {
+                        User.deleteOne({_id:user._id}, function(err){
+                            if(err)
+                                res.send(err);
+                        })
+                        res.send(err);
+                    }
+                    res.json({ message: 'New user account created!' });
+                })
+            });
+        }
     });
 };
 
 exports.deleteUserAccount = function(req, res) {
-    UserProfile.remove({idUser:req.user.id}, function(err){
+    UserProfile.deleteOne({idUser:req.user.id}, function(err){
         if(err)
             res.send(err);
 
-        User.remove({_id:req.user._id}, function(err){
+        User.deleteOne({_id:req.user._id}, function(err){
             if(err)
                 res.send(err);
             res.json({message: 'Your Account has been deleted!'})
