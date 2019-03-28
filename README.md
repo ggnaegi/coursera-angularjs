@@ -11,3 +11,10 @@ https://ggnaegi.github.io/coursera-angularjs/module4-solution/<br/>
 
 Angular 7:
 https://ggnaegi.github.io/coursera-angularjs/module4-solution-angular-7-build/<br/>
+
+User Profiles Service (Node.JS):
+https://ggnaegi-angularjs-profiles.herokuapp.com/api<br/>
+
+Chinese Restaurant Ruby On Rails:
+https://ggnaegi-coursera-angularjs.herokuapp.com<br/>
+
