@@ -12,6 +12,10 @@
         service.userAuthorization = '';
         service.userProfile = {};
 
+        service.isUserLoggedIn = function(){
+            return service.userAuthorization !== '';
+        }
+
         service.createNewUserAccount = function(newUserProfile){
             return $http({
                         method: 'POST',

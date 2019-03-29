@@ -14,8 +14,9 @@ LoadingHttpInterceptor.$inject = ['$rootScope', '$q'];
  */
 function LoadingHttpInterceptor($rootScope, $q) {
 
-  var loadingCount = 0;
-  var loadingEventName = 'spinner:activate';
+  let loadingCount = 0;
+  const loadingEventName = 'spinner:activate';
+  const responseReceivedEventName = 'response:received';
 
   return {
     request: function (config) {
@@ -31,6 +32,7 @@ function LoadingHttpInterceptor($rootScope, $q) {
     response: function (response) {
       if (--loadingCount === 0) {
         $rootScope.$broadcast(loadingEventName, {on: false});
+        $rootScope.$broadcast(responseReceivedEventName);
       }
 
       return response;
