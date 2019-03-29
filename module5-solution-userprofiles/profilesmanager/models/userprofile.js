@@ -8,7 +8,7 @@ const UserProfileSchema = new mongoose.Schema({
     address: String,
     city: String,
     postCode: String,
-    favoriteMenuItem: Number,
+    favoriteMenuItem: String,
     userId: String
 });
 

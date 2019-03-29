@@ -9,7 +9,7 @@ exports.getUserProfiles = function(req, res) {
 }
 
 exports.getUserProfile = function(req, res) {
-    UserProfile.find({userId: req.user._id}, function(err, userProfile){
+    UserProfile.findOne({userId: req.user._id}, function(err, userProfile){
         if(err)
             res.send(err);
 
@@ -34,7 +34,7 @@ exports.updateUserProfile = function(req, res) {
         userProfile.save(function(err){
             if(err)
                 res.send(err);
-            res.json(userProfile);
+            res.json({status: 'user_profile_updated'});
         });
     })
 }
@@ -44,7 +44,7 @@ exports.deleteUserProfile = function(req, res) {
         if(err)
             res.send(err);
 
-        res.json({message: 'User profile has been removed!'});
+        res.json({status: 'user_profile_deleted'});
     });
 }
 

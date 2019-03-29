@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
-//make sure to add your ip to the white list
-mongoose.connect("mongodb+srv://<username>:<password>@cluster0-0nxhw.azure.mongodb.net/userprofiles?retryWrites=true", {useNewUrlParser: true});
+//ok dangerous...
+mongoose.connect("...", {useNewUrlParser: true});
 
 const bodyParser = require('body-parser');
 const UserProfile  = require('./models/userprofile');
@@ -14,6 +15,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({
     extended:true
 }));
@@ -25,6 +27,9 @@ router.route('/profile')
 router.route('/account')
     .post(UserController.addNewUserAccount)
     .delete(AuthController.isAuthenticated, UserController.deleteUserAccount);
+
+router.route('/api')
+    .get(AuthController.isAuthenticated, UserController.welcomeUserAccount);
 
 app.use('/api', router);
 app.listen(port);

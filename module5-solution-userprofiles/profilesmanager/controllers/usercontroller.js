@@ -5,7 +5,7 @@ exports.addNewUserAccount = function(req, res) {
     User.findOne({username: req.body.username}, function(err, userProfile){
 
         if(userProfile)
-            res.json({message: 'User Account Creation Failed (existing username)'});
+            res.json({status: 'existing_username'});
         else
         {
             let user = new User({
@@ -37,12 +37,16 @@ exports.addNewUserAccount = function(req, res) {
                         })
                         res.send(err);
                     }
-                    res.json({ message: 'New user account created!' });
+                    res.json({ status: 'new_account_created' });
                 })
             });
         }
     });
 };
+
+exports.welcomeUserAccount = function(req, res) {
+    res.json({status: 'credentials_verified'});
+}
 
 exports.deleteUserAccount = function(req, res) {
     UserProfile.deleteOne({idUser:req.user.id}, function(err){
@@ -52,7 +56,7 @@ exports.deleteUserAccount = function(req, res) {
         User.deleteOne({_id:req.user._id}, function(err){
             if(err)
                 res.send(err);
-            res.json({message: 'Your Account has been deleted!'})
+            res.json({status: 'account_deleted'})
         });
     });
 };
