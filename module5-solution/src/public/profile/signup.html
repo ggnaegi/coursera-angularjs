@@ -1,0 +1,78 @@
+<div class="container">
+    <h2 class="text-center">
+        User Signup
+    </h2>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div ng-if="signupCtrl.done">
+                <h2 class="text-center">Your information has been saved.</h2>
+            </div>
+            <form name="signupForm" novalidate ng-if="!signupCtrl.done">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" ng-model="signupCtrl.userProfile.username" placeholder="Username" required>
+                    <span class="help-block" ng-if="signupForm.username.$error.required && signupForm.username.$touched">
+                        Username required
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           class="form-control" ng-model="signupCtrl.userProfile.password" placeholder="Password" required>
+                    <span class="help-block" ng-if="signupForm.password.$invalid && signupForm.password.$touched">
+                        Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Firstname</label>
+                    <input type="text" name="firstName" class="form-control" ng-model="signupCtrl.userProfile.firstname" placeholder="Firstname" required>
+                    <span class="help-block" ng-if="signupForm.firstName.$error.required && signupForm.firstName.$touched">
+                        Firstname required.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Lastname</label>
+                    <input type="text" name="lastName" class="form-control" ng-model="signupCtrl.userProfile.lastname" placeholder="Lastname" required>
+                    <span class="help-block" ng-if="signupForm.lastName.$error.required && signupForm.lastName.$touched">
+                        Lastname required.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" name="email" class="form-control" ng-model="signupCtrl.userProfile.email" placeholder="name@domain.com" required>
+                    <span class="help-block" ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+                        Must be a valid email address.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <input type="tel" name="phone" pattern="(\d{3})-(\d{3})-(\d{4})" class="form-control" ng-model="signupCtrl.userProfile.phone" placeholder="###-###-####" required>
+                    <span class="help-block" ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+                        Phone number must be in the format ###-###-####.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" name="address" class="form-control" ng-model="signupCtrl.userProfile.address" placeholder="Address" >
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" name="city" class="form-control" ng-model="signupCtrl.userProfile.city" placeholder="City" >
+                </div>
+                <div class="form-group">
+                    <label>Postcode</label>
+                    <input type="text" name="postcode" class="form-control" ng-model="signupCtrl.userProfile.postCode" placeholder="Postcode" >
+                </div>
+                <div class="form-group">
+                    <label>Favorite Menu</label>
+                    <input type="text" name="menuitem" class="form-control" ng-model="signupCtrl.userProfile.favoriteMenuItem" placeholder="Menu number" favorite-menu-item-directive ng-model-options="{ updateOn: 'blur' }" required>
+                    <span class="help-block" ng-if="signupForm.$error.invalidFavoriteMenuItem">
+                        No such menu number exists.
+                    </span>
+                </div>
+                <button ng-disabled="signupForm.$pending || signupForm.$invalid" ng-click="signupCtrl.submit()" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

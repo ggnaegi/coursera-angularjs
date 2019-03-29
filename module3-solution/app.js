@@ -44,7 +44,7 @@
                 narrowItDown.found = results;
             }).catch(function(error){
                 console.log("Error my friend.");
-            });
+            }));
         }
 
         narrowItDown.removeItem = function (itemIndex) {
