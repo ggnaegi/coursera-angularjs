@@ -33,12 +33,12 @@
             service.userAuthorization = '';
         };
 
-        service.userNameExists = function(userName){
+        service.getUserNames = function(){
             return $http({
                 method: 'GET',
                 url: ProfileApiPath + "/accounts"
             }).then(function(response){
-                return response.data.some(function(element){element === userName});
+                return response.data;
             })
         };
 

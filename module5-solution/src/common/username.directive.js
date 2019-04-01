@@ -2,14 +2,22 @@
     angular.module('common')
         .directive('userNameDirective', UserNameDirective);
 
-    UserNameDirective.$inject = ['ProfileService'];
-    function UserNameDirective(ProfileService){
+    UserNameDirective.$inject = ['ProfileService', '$q'];
+    function UserNameDirective(ProfileService, $q){
         return {
             restrict: 'A',
             require: 'ngModel',
-            link: function (scope, element, attr, ngModel) {
-                ngModel.$asyncValidators.userNameExists = function (modelValue, viewValue) {
-                    return ProfileService.userNameExists(viewValue);
+            link: function (scope, element, attr, ngModel, $q) {
+                ngModel.$asyncValidators.uniqueUserName = function (modelValue, viewValue) {
+                    let userNameValue = viewValue;
+                    return ProfileService.getUserNames().then(function foundUserName(result){
+                        if(result.indexOf(userNameValue) > -1) {
+                            return $q.reject();
+                        }
+                        else {
+                            return true;
+                        }
+                    })
                 }
             }
         };
