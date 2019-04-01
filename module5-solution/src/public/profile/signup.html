@@ -11,9 +11,9 @@
             <form name="signupForm" novalidate ng-if="!signupCtrl.done">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" name="username" class="form-control" ng-model="signupCtrl.userProfile.username" placeholder="Username" required>
-                    <span class="help-block" ng-if="signupForm.username.$error.required && signupForm.username.$touched">
-                        Username required
+                    <input type="text" name="username" class="form-control" ng-model="signupCtrl.userProfile.username" placeholder="Username"  user-name-directive ng-model-options="{ updateOn: 'blur' }" required>
+                    <span class="help-block" ng-if="(signupForm.lastName.$error.required && signupForm.firstName.$touched)||signupForm.$error.userNameExists">
+                        {{signupForm.$error.userNameExists?'Username already exists, please choose another': 'Username required'}}
                     </span>
                 </div>
                 <div class="form-group">

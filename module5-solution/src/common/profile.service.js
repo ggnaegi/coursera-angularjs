@@ -14,7 +14,7 @@
 
         service.isUserLoggedIn = function(){
             return service.userAuthorization !== '';
-        }
+        };
 
         service.createNewUserAccount = function(newUserProfile){
             return $http({
@@ -22,20 +22,29 @@
                         url: ProfileApiPath + "/account",
                         headers: {'Content-Type':'application/x-www-form-urlencoded'},
                         data: $httpParamSerializer(newUserProfile)
-                    }).then(function(response){
+                    }).then(function(){
                         service.userAuthorization = 'Basic ' + btoa(newUserProfile.username + ':' + newUserProfile.password);
-                    }).catch(function(exception) {
+                    }).catch(function() {
                         service.userAuthorization = '';
             });
-        }
+        };
 
         service.userLogOut = function(){
             service.userAuthorization = '';
-        }
+        };
+
+        service.userNameExists = function(userName){
+            return $http({
+                method: 'GET',
+                url: ProfileApiPath + "/accounts"
+            }).then(function(response){
+                return response.some(function(element){element === userName});
+            })
+        };
 
         service.setUserAuthorization = function(userCredentials){
             service.userAuthorization = 'Basic ' + btoa(userCredentials.username + ':' + userCredentials.password);
-        }
+        };
 
         service.getUserProfile = function(){
             return $http({
@@ -46,10 +55,10 @@
                         url: ProfileApiPath + "/profile"
                 }).then(function(response){
                    return response.data;
-                }).catch(function(exception){
+                }).catch(function(){
                     service.userAuthorization = '';
             });
-        }
+        };
 
         service.updateUserProfile = function(updatedUserProfile){
             return $http({
@@ -63,7 +72,7 @@
             }).then(function(response){
                 return response.data.status === 'user_profile_updated';
             });
-        }
+        };
 
         service.deleteUserAccount = function(){
             return $http({
