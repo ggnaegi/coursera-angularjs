@@ -1,0 +1,33 @@
+<div id="collapsable-nav" class="collapse navbar-collapse">
+    <ul id="nav-list" class="nav navbar-nav navbar-right">
+        <li id="navHomeButton" class="visible-xs">
+            <a href="index.html">
+                <span class="glyphicon glyphicon-home"></span> Home</a>
+        </li>
+        <li id="navMenuButton" ui-sref-active="active">
+            <a ui-sref="public.menu">
+                <span class="glyphicon glyphicon-cutlery"></span><br class="hidden-xs"> Menu</a>
+        </li>
+        <li>
+            <a ui-sref="public.info">
+                <span class="glyphicon glyphicon-info-sign"></span><br class="hidden-xs">My Info</a>
+        </li>
+        <li ng-if='!$ctrl.isUserLoggedIn'>
+            <a ui-sref="public.info" ng-controller="LoginController as loginCtrl" ng-click="loginCtrl.openLoginModal()">
+                <span class="glyphicon glyphicon-log-in"></span><br class="hidden-xs">Log In</a>
+        </li>
+        <li ng-if='!$ctrl.isUserLoggedIn'>
+            <a ui-sref="public.signup">
+                <span class="glyphicon glyphicon-certificate"></span><br class="hidden-xs">Sign Up</a>
+        </li>
+        <li ng-if='$ctrl.isUserLoggedIn'>
+            <a href="#" ng-click="$ctrl.userLogOut()">
+                <span class="glyphicon glyphicon-log-out"></span><br class="hidden-xs">Log Out</a>
+        </li>
+
+        <li id="phone" class="hidden-xs">
+            <a href="tel:410-602-5008">
+                <span>410-602-5008</span></a><div>* We Deliver</div>
+        </li>
+    </ul><!-- #nav-list -->
+</div>

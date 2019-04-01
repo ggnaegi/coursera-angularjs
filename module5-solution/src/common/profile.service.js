@@ -23,14 +23,14 @@
                         headers: {'Content-Type':'application/x-www-form-urlencoded'},
                         data: $httpParamSerializer(newUserProfile)
                     }).then(function(response){
-                        if(response.data.status === 'new_account_created') {
-                            service.userAuthorization = 'Basic ' + btoa(newUserProfile.username + ':' + newUserProfile.password);
-                        }
-                        else
-                            service.userAuthorization = '';
+                        service.userAuthorization = 'Basic ' + btoa(newUserProfile.username + ':' + newUserProfile.password);
+                    }).catch(function(exception) {
+                        service.userAuthorization = '';
+            });
+        }
 
-                        return response.data.status === 'new_account_created';
-                    });
+        service.userLogOut = function(){
+            service.userAuthorization = '';
         }
 
         service.setUserAuthorization = function(userCredentials){
@@ -46,7 +46,9 @@
                         url: ProfileApiPath + "/profile"
                 }).then(function(response){
                    return response.data;
-                });
+                }).catch(function(exception){
+                    service.userAuthorization = '';
+            });
         }
 
         service.updateUserProfile = function(updatedUserProfile){

@@ -3,7 +3,7 @@
         User Profile Information
     </h2>
     <div ng-if="!profileInfoCtrl.registered">
-        <p class="text-center">Not Signed Up/Not Logged In Yet. <button ng-controller="LoginController as loginCtrl" ng-click="loginCtrl.openLoginModal()">Login</button> | <a ui-sref="public.signup">Sign up Now!</a></p>
+        <p class="text-center">Not Signed Up/Not Logged In Yet. <a ui-sref="public.info" ng-controller="LoginController as loginCtrl" ng-click="loginCtrl.openLoginModal()">Login</a> | <a ui-sref="public.signup">Sign up Now!</a></p>
     </div>
 
     <div class="row" ng-if="profileInfoCtrl.registered">

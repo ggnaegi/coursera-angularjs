@@ -40,30 +40,8 @@
             </button>
           </div>
 
-          <div id="collapsable-nav" class="collapse navbar-collapse">
-            <ul id="nav-list" class="nav navbar-nav navbar-right">
-              <li id="navHomeButton" class="visible-xs">
-                <a href="index.html">
-                  <span class="glyphicon glyphicon-home"></span> Home</a>
-              </li>
-              <li id="navMenuButton" ui-sref-active="active">
-                <a ui-sref="public.menu">
-                  <span class="glyphicon glyphicon-cutlery"></span><br class="hidden-xs"> Menu</a>
-              </li>
-              <li>
-                <a ui-sref="public.info">
-                  <span class="glyphicon glyphicon-info-sign"></span><br class="hidden-xs">My Info</a>
-              </li>
-              <li signup-directive ng-if="!signupDirectiveCtrl.isUserLoggedIn">
-                <a ui-sref="public.signup">
-                  <span class="glyphicon glyphicon-certificate"></span><br class="hidden-xs">Sign Up</a>
-              </li>
-              <li id="phone" class="hidden-xs">
-                <a href="tel:410-602-5008">
-                  <span>410-602-5008</span></a><div>* We Deliver</div>
-              </li>
-            </ul><!-- #nav-list -->
-          </div><!-- .collapse .navbar-collapse -->
+          <loginsignup></loginsignup>
+          <!-- .collapse .navbar-collapse -->
         </div><!-- .container -->
       </nav><!-- #header-nav -->
     </header>
@@ -130,8 +108,7 @@
     <script src="src/common/menu.service.js"></script>
     <script src="src/common/profile.service.js"></script>
     <script src="src/common/favoritemenuitem.directive.js"></script>
-    <script src="src/common/signup.directive.js"></script>
-    <script src="src/common/signup.directive.controller.js"></script>
+
 
     <!-- Public Module -->
     <script src="src/public/public.module.js"></script>
@@ -144,6 +121,7 @@
     <script src="src/public/profile/profile.info.controller.js"></script>
     <script src="src/public/profile/profile.login.controller.js"></script>
     <script src="src/public/profile/profile.login.content.controller.js"></script>
+    <script src="src/public/profile/loginsignup.component.js"></script>
 
     <!-- ADMIN SITE -->
 

@@ -41,6 +41,7 @@ function LoadingHttpInterceptor($rootScope, $q) {
     responseError: function (response) {
       if (--loadingCount === 0) {
         $rootScope.$broadcast(loadingEventName, {on: false});
+        $rootScope.$broadcast(responseReceivedEventName);
       }
 
       return $q.reject(response);

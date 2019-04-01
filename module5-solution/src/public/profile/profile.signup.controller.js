@@ -3,15 +3,14 @@
     angular.module('public')
         .controller('SignupController', SignupController)
 
-    SignupController.$inject = ['ProfileService'];
-    function SignupController(ProfileService) {
+    SignupController.$inject = ['ProfileService', '$location'];
+    function SignupController(ProfileService, $location) {
         const signupCtrl = this;
 
-        signupCtrl.done = false;
         signupCtrl.submit = function () {
             ProfileService.createNewUserAccount(signupCtrl.userProfile)
                 .then(function(result){
-                    signupCtrl.done = result.data;
+                    $location.path("/profile/info")
                 });
         }
     }
