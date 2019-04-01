@@ -1,6 +1,7 @@
 // Load required packages
 const bcrypt = require("bcrypt-nodejs");
 const mongoose = require("mongoose");
+const UserProfile = require('../models/userprofile');
 // Define our user schema
 const UserSchema = new mongoose.Schema({
     username: {
@@ -11,16 +12,19 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    profile:{type:mongoose.Schema.Types.ObjectId, ref: 'UserProfile'}
 });
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(callback) {
     const user = this;
-
     // Break out if the password hasn't changed
     if (!user.isModified('password')) return callback();
 
+    user.profile.save(function(err){
+        if(err) return callback(err);
+    })
     // Password changed so we need to hash it
     bcrypt.genSalt(5, function(err, salt) {
         if (err) return callback(err);

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 //ok dangerous...
-mongoose.connect("...", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://mongodbsvc:LNAmjM*<\"4=Y'3!daD_X@cluster0-0nxhw.azure.mongodb.net/userprofiles?retryWrites=true", {useNewUrlParser: true});
 
 const bodyParser = require('body-parser');
 const UserProfile  = require('./models/userprofile');
@@ -27,9 +27,6 @@ router.route('/profile')
 router.route('/account')
     .post(UserController.addNewUserAccount)
     .delete(AuthController.isAuthenticated, UserController.deleteUserAccount);
-
-router.route('/api')
-    .get(AuthController.isAuthenticated, UserController.welcomeUserAccount);
 
 app.use('/api', router);
 app.listen(port);

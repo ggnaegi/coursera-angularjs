@@ -1,26 +1,17 @@
 const UserProfile = require('../models/userprofile');
 
-exports.getUserProfiles = function(req, res) {
-    UserProfile.find(function(err, userProfiles){
-        if(err)
-            res.send(err);
-        res.json(userProfiles);
-    })
-}
-
 exports.getUserProfile = function(req, res) {
-    UserProfile.findOne({userId: req.user._id}, function(err, userProfile){
+    UserProfile.findOne({_id:req.user.profile}, function(err, userProfile){
         if(err)
-            res.send(err);
-
+            return res.send(err);
         res.json(userProfile);
     });
 }
 
 exports.updateUserProfile = function(req, res) {
-    UserProfile.findOne({userId: req.user._id}, function(err, userProfile){
+    UserProfile.findOne({_id: req.user.profile}, function(err, userProfile){
         if(err)
-            res.send(err);
+            return res.send(err);
 
         userProfile.firstname = req.body.firstname;
         userProfile.lastname = req.body.lastname;
@@ -33,19 +24,10 @@ exports.updateUserProfile = function(req, res) {
 
         userProfile.save(function(err){
             if(err)
-                res.send(err);
+                return res.send(err);
             res.json({status: 'user_profile_updated'});
         });
     })
-}
-
-exports.deleteUserProfile = function(req, res) {
-    UserProfile.deleteOne({userId:req.user._id}, function(err){
-        if(err)
-            res.send(err);
-
-        res.json({status: 'user_profile_deleted'});
-    });
 }
 
 
