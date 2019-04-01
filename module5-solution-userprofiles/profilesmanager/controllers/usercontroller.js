@@ -35,6 +35,14 @@ exports.addNewUserAccount = function(req, res) {
     });
 };
 
+exports.getUserNames = function(req, res) {
+    User.find({}, function(err, users){
+        if(err)
+            return res.send(err);
+        res.json(users.map(function(x){return x.username}));
+    });
+}
+
 exports.welcomeUserAccount = function(req, res) {
     res.json({status: 'credentials_verified'});
 }

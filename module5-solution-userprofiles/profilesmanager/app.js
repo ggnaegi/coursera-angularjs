@@ -28,5 +28,8 @@ router.route('/account')
     .post(UserController.addNewUserAccount)
     .delete(AuthController.isAuthenticated, UserController.deleteUserAccount);
 
+router.route('/accounts')
+    .get(UserController.getUserNames);
+
 app.use('/api', router);
 app.listen(port);
